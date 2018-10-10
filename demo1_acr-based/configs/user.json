@@ -1,0 +1,20 @@
+{
+  "schemas":[],
+  "name":{
+    "familyName":"Miller",
+    "givenName":"Alex"
+  },
+  "userName":"alex",
+  "password":"alex123",
+  "emails":"alex@pickup.com",
+  "phoneNumbers":[
+    {
+      "primary":true,
+      "value":"${MOBILE}",
+      "type":"mobile"
+    }
+  ],
+  "addresses":{
+    "country":"United States"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "schemas":[],
+  "name":{
+    "familyName":"Taylor",
+    "givenName":"Bob"
+  },
+  "userName":"bob",
+  "password":"bob123",
+  "emails":[
+    {
+      "primary":"true",
+      "value":"bob456@pickup.com",
+      "type":"home"
+    }
+  ]
+}

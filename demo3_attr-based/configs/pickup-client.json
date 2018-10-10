@@ -1,0 +1,13 @@
+{
+  "redirect_uris": [
+    "http://localhost.com:8080/oidc-web-app-pickup/oauth2client"
+  ],
+  "client_name": "pickup",
+  "grant_types": [
+    "password",
+    "client_credentials",
+    "authorization_code"
+  ],
+  "ext_param_client_id": "pickupApplicationClientId",
+  "ext_param_client_secret": "pickupApplicationClientSecret"
+}
