@@ -71,22 +71,25 @@
                     <!--Optional:-->
                     <xsd1:authenticationScriptConfig>
                         <!--Optional:-->
-                        <xsd2:content>var supportedAcrValues = ['acr1', 'acr2'];&#xd;
+                        <xsd2:content>var supportedAcrValues = ['generalBooking', 'allDayBooking'];&#xd;
 &#xd;
 function onLoginRequest(context) {&#xd;
     var selectedAcr = selectAcrFrom(context, supportedAcrValues);&#xd;
-    Log.info('--------------- ACR selected: ' + selectedAcr);&#xd;
-    context.selectedAcr = selectedAcr;&#xd;
     switch (selectedAcr) {&#xd;
-        case supportedAcrValues[0] :&#xd;
+        case 'generalBooking' :&#xd;
             executeStep(1);&#xd;
             break;&#xd;
-        case supportedAcrValues[1] :&#xd;
+        case 'allDayBooking' :&#xd;
             executeStep(1);&#xd;
             executeStep(2);&#xd;
             break;&#xd;
         default:&#xd;
-            executeStep(1);&#xd;
+            executeStep(1, {&#xd;
+              onSuccess: function (context) {&#xd;
+                //nothing to implement. onSuccess function is added to&#xd;
+                //handle retrying authentication&#xd;
+              }&#xd;
+            });&#xd;
     }&#xd;
 }&#xd;
 </xsd2:content>

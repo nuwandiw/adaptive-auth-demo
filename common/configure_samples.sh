@@ -602,21 +602,39 @@ create_smsotp_idp() {
     fi
 
     echo
-    echo "Please enter the API key from Nexmo"
+    echo "Please enter SMS Url"
     echo
-    read -r key
+    read -r sms_url
     echo
-    echo "Please enter the API secret from Nexmo"
+    echo "Please enter HTTP Method"
     echo
-    read -r secret
+    read -r http_method
     echo
-
+    echo "Please enter HTTP Payload"
+    echo
+    read -r http_payload
+    echo
+    echo "Please enter HTTP Headers"
+    echo
+    read -r http_headers
+    echo
+    echo "Please enter HTTP Respose Code"
+    echo
+    read -r http_response_code
+ 
     cp ${config_file} tmp/create-idp.xml
+
+    escaped_payload=$(echo ${http_payload} | sed 's/\&/\&amp;/g')
 
     sed -i '.bak' 's/${DISPLAY_NAME}/'${display_name}'/g' tmp/create-idp.xml
     sed -i '.bak' 's/${IDP_NAME}/'${idp_name}'/g' tmp/create-idp.xml
-    sed -i '.bak' 's/${API_KEY}/'${key}'/g' tmp/create-idp.xml
-    sed -i '.bak' 's/${API_SECRET}/'${secret}'/g' tmp/create-idp.xml
+    sed -i '.bak' 's/${HTTP_METHOD}/'${http_method}'/g' tmp/create-idp.xml
+    sed -i '.bak' 's/${HEADERS}/'"${http_headers}"'/g' tmp/create-idp.xml
+    sed -i '.bak' 's/${PAYLOAD}/'"${escaped_payload//&/\\&}"'/g' tmp/create-idp.xml
+
+
+    sed -i '.bak' 's/${RESPONSE_CODE}/'${http_response_code}'/g' tmp/create-idp.xml
+    sed -i '.bak' 's,${SMS_URL},'${sms_url}',g' tmp/create-idp.xml
 
     curl -s -k --user ${username}:${password} -d @tmp/create-idp.xml -H "Content-Type: text/xml" \
     -H "SOAPAction: urn:addIdP" -o /dev/null \

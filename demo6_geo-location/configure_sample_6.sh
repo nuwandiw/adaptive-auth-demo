@@ -45,7 +45,7 @@ configure_sample6() {
             create_smsotp_idp "SMS_OTP" "SMS_OTP" "${COMMON_HOME}/configs/create-smsotp-idp.xml" admin admin
             configure_service_provider pickup admin admin "${COMMON_HOME}/configs/get-sp.xml" "${SAMPLE_HOME}/configs/update-sp.xml"
             echo
-            echo "Please enter mobile number for Alex (user Alex is created and may require to submit an OTP sent to his phone)"
+            echo "Please enter mobile number for Bob (user Bob is created and may require to submit an OTP sent to his phone)"
             read -r mobile_alex
             echo 
             add_user_claim admin admin alex http://wso2.org/claims/mobile ${mobile_alex} "${COMMON_HOME}/configs/set-claim.xml"
@@ -62,28 +62,31 @@ configure_sample6() {
 
 display_sample_info() {
     echo
-    echo "----------------------------------------------------------------------"
+     echo "----------------------------------------------------------------------"
     echo "|                                                                    |"
-    echo "|    The conditional authentication enables you to add more          |"
-    echo "|    control and constraints to the authentication process.          |"
+    echo "|    In this example, we demonstrate how to strengthen authentication|"
+    echo "|    according to the geo location of the user                       |"
     echo "|                                                                    |"
-    echo "|    Here we are going to try out a conditional authentication       |"
-    echo "|    scenario where users will be prompted a second factor to        |"
-    echo "|    authenticate when they are logged in from a mobile device.      |"
+    echo "|    Story:                                                          |"
+    echo "|    1. Bob login into PickUp application by entering username and   |"
+    echo "|    password from US.                                               |"
+    echo "|                                                                    |"
+    echo "|    2. Bob log-out from the application.                            |"
+    echo "|                                                                    |"
+    echo "|    3. Someone trying to login to PickUp application using same     |"
+    echo "|    credentials but from UK                                         |"
+    echo "|                                                                    |"
+    echo "|    4. Prompt for SMS verification as an extra security measure     |"
     echo "|                                                                    |"
     echo "|    To tryout conditional authentication please log into            |"
     echo "|    the sample applications below.                                  |"
     echo "|                                                                    |"
-    echo "|    Dispatch - http://localhost:8080/saml2-web-app-dispatch.com/    |"
-    echo "|    Swift - http://localhost:8080/saml2-web-app-swift.com/          |"
+    echo "|    PickUp - http://localhost:8080/oidc-web-app-pickup/             |"
     echo "|                                                                    |"
-    echo "|    Users                                                           |"
-    echo "|      Username: cameron                                             |"
-    echo "|      Password: cameron123                                          |"
     echo "|                                                                    |"
-    echo "|      Username: alex                                                |"
-    echo "|      Password: alex123                                             |"
-    echo "|                                                                    |"
+    echo "|    User                                                            |"
+    echo "|    username: bob                                                   |"
+    echo "|    password: bob123                                                |"
     echo "----------------------------------------------------------------------"
     echo
     echo "If you have finished trying out the sample, you can clean the generated artifacts now."
@@ -240,7 +243,7 @@ cd ${SAMPLE_HOME} || return
 
 . ${COMMON_HOME}/configure_samples.sh
 
-create_user admin admin "Alex Miller" "${COMMON_HOME}/configs/user_alex.json"
+create_user admin admin "Bob Taylor" "${COMMON_HOME}/configs/user_bob.json"
 add_claim admin admin "${COMMON_HOME}/configs/add-sms-otp-disabled-claim.xml"
 create_oidc_service_provider admin admin pickup "${COMMON_HOME}/configs/pickup-client.json"
 configure_sample6

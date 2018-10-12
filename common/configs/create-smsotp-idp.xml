@@ -50,25 +50,25 @@
                         <!--Optional:-->
                         <xsd:name>sms_url</xsd:name>
                         <!--Optional:-->
-                        <xsd:value>https://rest.nexmo.com/sms/json?api_key=${API_KEY}&amp;api_secret=${API_SECRET}&amp;from=NEXMO&amp;to=$ctx.num&amp;text=$ctx.msg</xsd:value>
+                        <xsd:value>${SMS_URL}</xsd:value>
                     </xsd:properties>
                     <xsd:properties>
                         <!--Optional:-->
                         <xsd:name>http_method</xsd:name>
                         <!--Optional:-->
-                        <xsd:value>POST</xsd:value>
+                        <xsd:value>${HTTP_METHOD}</xsd:value>
                     </xsd:properties>
                     <xsd:properties>
                         <xsd:name>headers</xsd:name>
-                        <xsd:value></xsd:value>
+                        <xsd:value>${HEADERS}</xsd:value>
                     </xsd:properties>
                     <xsd:properties>
                         <xsd:name>payload</xsd:name>
-                        <xsd:value></xsd:value>
+                        <xsd:value>${PAYLOAD}</xsd:value>
                     </xsd:properties>
                     <xsd:properties>
                         <xsd:name>http_response</xsd:name>
-                        <xsd:value></xsd:value>
+                        <xsd:value>${RESPONSE_CODE}</xsd:value>
                     </xsd:properties>
                 </xsd:defaultAuthenticatorConfig>
                 <!--Optional:-->
@@ -88,25 +88,25 @@
                         <!--Optional:-->
                         <xsd:name>sms_url</xsd:name>
                         <!--Optional:-->
-                        <xsd:value>https://rest.nexmo.com/sms/json?api_key=${API_KEY}&amp;api_secret=${API_SECRET}&amp;from=NEXMO&amp;to=$ctx.num&amp;text=$ctx.msg</xsd:value>
+                        <xsd:value>${SMS_URL}</xsd:value>
                     </xsd:properties>
                     <xsd:properties>
                         <!--Optional:-->
                         <xsd:name>http_method</xsd:name>
                         <!--Optional:-->
-                        <xsd:value>POST</xsd:value>
+                        <xsd:value>${HTTP_METHOD}</xsd:value>
                     </xsd:properties>
                     <xsd:properties>
                         <xsd:name>headers</xsd:name>
-                        <xsd:value></xsd:value>
+                        <xsd:value>${HEADERS}</xsd:value>
                     </xsd:properties>
                     <xsd:properties>
                         <xsd:name>payload</xsd:name>
-                        <xsd:value></xsd:value>
+                        <xsd:value>${PAYLOAD}</xsd:value>
                     </xsd:properties>
                     <xsd:properties>
                         <xsd:name>http_response</xsd:name>
-                        <xsd:value></xsd:value>
+                        <xsd:value>${RESPONSE_CODE}</xsd:value>
                     </xsd:properties>
                 </xsd:federatedAuthenticatorConfigs>
                 <!--Optional:-->

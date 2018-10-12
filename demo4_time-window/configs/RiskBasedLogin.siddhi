@@ -12,7 +12,7 @@ define stream TempStream (messageId string, username string, sumTransactions lon
 @Source(type = 'http', receiver.url="http://localhost:8281/RiskBasedLogin/TransactionInputStream", basic.auth.enabled='false', @map(type='json', @attributes(username='$.event.username', transaction='$.event.transaction')))
 define stream TransactionInputStream (transaction int, username string);
  
-from TransactionInputStream#window.time(5 min)
+from TransactionInputStream#window.time(1 min)
 right outer join InputStream#window.length(1) unidirectional
 on TransactionInputStream.username == InputStream.username
 select InputStream.messageId, InputStream.username, sum(transaction) as sumTransactions
