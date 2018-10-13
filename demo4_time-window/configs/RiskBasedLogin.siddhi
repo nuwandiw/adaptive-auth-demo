@@ -1,8 +1,8 @@
 @App:name("RiskBasedLogin")
 @App:description("Description of the plan")
  
-@Source(type = 'http-request', source.id='testsource', basic.auth.enabled='true', parameters="'ciphers:TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256', 'sslEnabledProtocols:TLSv1.1,TLSv1.2'", receiver.url="https://localhost:8280/RiskBasedLogin/InputStream", @map(type='json', @attributes(messageId='trp:messageId',username='$.event.username')))
-define stream InputStream (messageId string, username string);
+@Source(type = 'http-request', source.id='testsource', basic.auth.enabled='true', parameters="'ciphers:TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256', 'sslEnabledProtocols:TLSv1.1,TLSv1.2'", receiver.url="https://localhost:8280/RiskBasedLogin/CancelledBookingStream", @map(type='json', @attributes(messageId='trp:messageId',username='$.event.username')))
+define stream CancelledBookingStream (messageId string, username string);
  
 @sink(type='http-response', source.id='testsource', message.id='{{messageId}}', @map(type='json'))
 define stream OutputStream (messageId string, username string, riskScore int);
@@ -13,10 +13,10 @@ define stream TempStream (messageId string, username string, sumTransactions lon
 define stream TransactionInputStream (transaction int, username string);
  
 from TransactionInputStream#window.time(1 min)
-right outer join InputStream#window.length(1) unidirectional
-on TransactionInputStream.username == InputStream.username
-select InputStream.messageId, InputStream.username, sum(transaction) as sumTransactions
-group by messageId, InputStream.username
+right outer join CancelledBookingStream#window.length(1) unidirectional
+on TransactionInputStream.username == CancelledBookingStream.username
+select CancelledBookingStream.messageId, CancelledBookingStream.username, sum(transaction) as sumTransactions
+group by messageId, CancelledBookingStream.username
 insert into TempStream;
  
 from TempStream

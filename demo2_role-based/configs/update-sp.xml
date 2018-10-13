@@ -40,28 +40,20 @@
                 <xsd1:description>Sample service provider for ${SP_NAME} Web Application</xsd1:description>
                 <!--Optional:-->
                 <xsd1:inboundAuthenticationConfig>
-                    <!--Zero or more repetitions:-->
                     <xsd1:inboundAuthenticationRequestConfigs>
-                        <!--Optional:-->
-                        <xsd1:inboundAuthKey>saml2-web-app-${SP_NAME}.com</xsd1:inboundAuthKey>
-                        <!--Optional:-->
-                        <xsd1:inboundAuthType>samlsso</xsd1:inboundAuthType>
-                        <!--Zero or more repetitions:-->
+                        <xsd1:inboundAuthKey>pickupApplicationClientId</xsd1:inboundAuthKey>
+                        <xsd1:inboundAuthType>oauth2</xsd1:inboundAuthType>
                         <xsd1:properties>
-                            <xsd1:name>attrConsumServiceIndex</xsd1:name>
-                            <xsd1:value>1223160755</xsd1:value>
+                            <xsd1:name>oauthConsumerSecret</xsd1:name>
+                            <xsd1:value>pickupApplicationClientSecret</xsd1:value>
                         </xsd1:properties>
                     </xsd1:inboundAuthenticationRequestConfigs>
                     <xsd1:inboundAuthenticationRequestConfigs>
-                        <!--Optional:-->
-                        <xsd1:inboundAuthKey/>
-                        <!--Optional:-->
+                        <xsd1:inboundAuthKey>application_pickup</xsd1:inboundAuthKey>
                         <xsd1:inboundAuthType>passivests</xsd1:inboundAuthType>
                     </xsd1:inboundAuthenticationRequestConfigs>
                     <xsd1:inboundAuthenticationRequestConfigs>
-                        <!--Optional:-->
-                        <xsd1:inboundAuthKey/>
-                        <!--Optional:-->
+                        <xsd1:inboundAuthKey>application_pickup</xsd1:inboundAuthKey>
                         <xsd1:inboundAuthType>openid</xsd1:inboundAuthType>
                     </xsd1:inboundAuthenticationRequestConfigs>
                 </xsd1:inboundAuthenticationConfig>
@@ -79,20 +71,20 @@
                     <!--Optional:-->
                     <xsd1:authenticationScriptConfig>
                         <!--Optional:-->
-                        <xsd2:content>var rolesToStepUp = ['admin', 'Manager'];&#xD;
-  function onLoginRequest(context) {&#xD;
-    executeStep(1, {&#xD;
-        onSuccess: function(context) {&#xD;
-            var user = context.currentKnownSubject;&#xD;
-            var hasRole = hasAnyOfTheRoles(user, rolesToStepUp);&#xD;
-&#xD;
-            if (hasRole) {&#xD;
-                executeStep(2);&#xD;
-            }&#xD; else {&#xD;
-                executeStep(3);&#xD;
-            }&#xD;
-        }&#xD;
-    });&#xD;
+                        <xsd2:content>var rolesToStepUp = ['Admin_Role', 'Manager_Role'];&#xd;
+  function onLoginRequest(context) {&#xd;
+    executeStep(1, {&#xd;
+        onSuccess: function(context) {&#xd;
+            var user = context.currentKnownSubject;&#xd;
+            var hasRole = hasAnyOfTheRoles(user, rolesToStepUp);&#xd;
+&#xd;
+            if (hasRole) {&#xd;
+                executeStep(2);&#xd;
+            } else {&#xd;
+                executeStep(3);&#xd;
+            }&#xd;
+        }&#xd;
+    });&#xd;
 }</xsd2:content>
                         <!--Optional:-->
                         <xsd2:enabled>true</xsd2:enabled>

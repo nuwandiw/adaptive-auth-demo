@@ -48,7 +48,6 @@ configure_sample_2() {
         [Yy]* )
             create_google_idp "GoogleIDP" "GoogleIDP" "${COMMON_HOME}/configs/create-google-idp.xml" admin admin
             create_fb_idp "FacebookIDP" "FacebookIDP" "${COMMON_HOME}/configs/create-fb-idp.xml" admin admin
-            configure_service_provider_for_samlsso pickup saml2-web-app-pickup.com http://localhost.com:8080/saml2-web-app-pickup.com/home.jsp admin admin "${COMMON_HOME}/configs/sso-config.xml"
             configure_service_provider pickup admin admin "${COMMON_HOME}/configs/get-sp.xml" "${SAMPLE_HOME}/configs/update-sp.xml"
             display_sample_info
         ;;
@@ -202,7 +201,6 @@ cd ${SAMPLE_HOME} || return
 . ${COMMON_HOME}/configure_samples.sh
 
 create_user admin admin "Alex Miller" "${COMMON_HOME}/configs/user_alex.json"
-create_user_with_role admin admin "Bob" "Manager" "${COMMON_HOME}/configs/user_bob.json" "${COMMON_HOME}/configs/role_manager.json"
-
-create_service_provider pickup admin admin "${COMMON_HOME}/configs/create-sp.xml"
+create_user_with_role admin admin "Bob" "Manager_Role" "${COMMON_HOME}/configs/user_bob.json" "${COMMON_HOME}/configs/role_manager.json"
+create_oidc_service_provider admin admin pickup "${COMMON_HOME}/configs/pickup-client.json"
 configure_sample_2

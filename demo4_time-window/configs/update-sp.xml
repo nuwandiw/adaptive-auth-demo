@@ -71,21 +71,17 @@
                     <!--Optional:-->
                     <xsd1:authenticationScriptConfig>
                         <!--Optional:-->
-                        <xsd2:content>var siddhiApplication = 'RiskBasedLogin';&#xd;
-var siddhiInputStream = 'InputStream';&#xd;
-&#xd;
-function onLoginRequest(context) {&#xd;
+                        <xsd2:content>function onLoginRequest(context) {&#xd;
     executeStep(1, {&#xd;
         onSuccess: function (context) {&#xd;
             var username = context.currentKnownSubject.username;&#xd;
-            callAnalytics({'Application':siddhiApplication,'InputStream':siddhiInputStream}, {'username':username}, {&#xd;
+            callAnalytics({'Application':'RiskBasedLogin', 'InputStream':'CancelledBookingStream'}, &#xd;
+                          {'username':username}, {&#xd;
                 onSuccess : function(context, data) {&#xd;
-                    Log.info('--------------- Received risk score value: ' + data.event.riskScore);&#xd;
                     if (data.event.riskScore > 0) {&#xd;
                         executeStep(2);&#xd;
                     }&#xd;
                 }, onFail : function(context, data) {&#xd;
-                    Log.info('--------------- Failed to call analytics engine');&#xd;
                     executeStep(2);&#xd;
                 }&#xd;
             });&#xd;

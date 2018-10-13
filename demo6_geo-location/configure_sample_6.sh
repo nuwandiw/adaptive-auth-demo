@@ -46,9 +46,9 @@ configure_sample6() {
             configure_service_provider pickup admin admin "${COMMON_HOME}/configs/get-sp.xml" "${SAMPLE_HOME}/configs/update-sp.xml"
             echo
             echo "Please enter mobile number for Bob (user Bob is created and may require to submit an OTP sent to his phone)"
-            read -r mobile_alex
+            read -r mobile_bob
             echo 
-            add_user_claim admin admin alex http://wso2.org/claims/mobile ${mobile_alex} "${COMMON_HOME}/configs/set-claim.xml"
+            add_user_claim admin admin bob http://wso2.org/claims/mobile ${mobile_bob} "${COMMON_HOME}/configs/set-claim.xml"
             
             display_sample_info
         ;;
